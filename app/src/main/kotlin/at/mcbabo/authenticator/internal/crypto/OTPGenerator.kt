@@ -1,4 +1,4 @@
-package at.mcbabo.authenticator.data.crypto
+package at.mcbabo.authenticator.internal.crypto
 
 import android.util.Base64
 import androidx.core.net.toUri

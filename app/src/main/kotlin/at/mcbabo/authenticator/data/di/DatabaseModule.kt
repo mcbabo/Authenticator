@@ -2,12 +2,12 @@ package at.mcbabo.authenticator.data.di
 
 import android.content.Context
 import androidx.room.Room
-import at.mcbabo.authenticator.data.crypto.OTPGenerator
-import at.mcbabo.authenticator.data.crypto.OtpSecretEncryption
 import at.mcbabo.authenticator.data.db.AppDatabase
 import at.mcbabo.authenticator.data.db.OtpAccountDao
 import at.mcbabo.authenticator.data.repository.OtpAccountRepository
 import at.mcbabo.authenticator.data.store.UserPreferences
+import at.mcbabo.authenticator.internal.crypto.OTPGenerator
+import at.mcbabo.authenticator.internal.crypto.OtpSecretEncryption
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

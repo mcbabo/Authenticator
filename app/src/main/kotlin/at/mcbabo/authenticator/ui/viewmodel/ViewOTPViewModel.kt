@@ -3,12 +3,12 @@ package at.mcbabo.authenticator.ui.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import at.mcbabo.authenticator.data.crypto.AuthType
-import at.mcbabo.authenticator.data.crypto.OTPGenerator
 import at.mcbabo.authenticator.data.db.OtpAccount
 import at.mcbabo.authenticator.data.repository.OtpAccountRepository
 import at.mcbabo.authenticator.data.store.SortType
 import at.mcbabo.authenticator.data.store.UserPreferences
+import at.mcbabo.authenticator.internal.crypto.AuthType
+import at.mcbabo.authenticator.internal.crypto.OTPGenerator
 import at.mcbabo.authenticator.internal.levenshtein
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay

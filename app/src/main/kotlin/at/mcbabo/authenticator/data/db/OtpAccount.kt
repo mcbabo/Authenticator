@@ -3,8 +3,8 @@ package at.mcbabo.authenticator.data.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import at.mcbabo.authenticator.data.crypto.Algorithm
-import at.mcbabo.authenticator.data.crypto.AuthType
+import at.mcbabo.authenticator.internal.crypto.Algorithm
+import at.mcbabo.authenticator.internal.crypto.AuthType
 
 @Entity(tableName = "otp_accounts")
 data class OtpAccount(

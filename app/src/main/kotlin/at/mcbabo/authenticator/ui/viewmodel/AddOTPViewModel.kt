@@ -3,10 +3,10 @@ package at.mcbabo.authenticator.ui.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import at.mcbabo.authenticator.data.crypto.Algorithm
-import at.mcbabo.authenticator.data.crypto.AuthType
-import at.mcbabo.authenticator.data.crypto.OtpAuthData
 import at.mcbabo.authenticator.data.repository.OtpAccountRepository
+import at.mcbabo.authenticator.internal.crypto.Algorithm
+import at.mcbabo.authenticator.internal.crypto.AuthType
+import at.mcbabo.authenticator.internal.crypto.OtpAuthData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

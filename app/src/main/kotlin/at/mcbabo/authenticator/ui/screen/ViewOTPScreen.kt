@@ -58,8 +58,8 @@ import androidx.compose.ui.platform.toClipEntry
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import at.mcbabo.authenticator.R
-import at.mcbabo.authenticator.data.crypto.AuthType
 import at.mcbabo.authenticator.data.store.SortType
+import at.mcbabo.authenticator.internal.crypto.AuthType
 import at.mcbabo.authenticator.ui.components.OTPAccountItem
 import at.mcbabo.authenticator.ui.components.SearchBarInput
 import at.mcbabo.authenticator.ui.viewmodel.ViewOTPUiState

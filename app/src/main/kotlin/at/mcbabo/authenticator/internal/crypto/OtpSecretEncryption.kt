@@ -1,4 +1,4 @@
-package at.mcbabo.authenticator.data.crypto
+package at.mcbabo.authenticator.internal.crypto
 
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties

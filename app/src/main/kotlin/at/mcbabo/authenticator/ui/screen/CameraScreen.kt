@@ -37,9 +37,9 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import at.mcbabo.authenticator.R
-import at.mcbabo.authenticator.data.crypto.QRCodeResult
-import at.mcbabo.authenticator.data.crypto.parseQRCodeType
 import at.mcbabo.authenticator.internal.QrCodeAnalyzer
+import at.mcbabo.authenticator.internal.crypto.QRCodeResult
+import at.mcbabo.authenticator.internal.crypto.parseQRCodeType
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState

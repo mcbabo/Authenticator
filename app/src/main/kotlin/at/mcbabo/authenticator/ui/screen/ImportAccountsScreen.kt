@@ -33,8 +33,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import at.mcbabo.authenticator.R
-import at.mcbabo.authenticator.data.crypto.OtpAuthData
-import at.mcbabo.authenticator.data.crypto.parseOTPMigrationData
+import at.mcbabo.authenticator.internal.crypto.OtpAuthData
+import at.mcbabo.authenticator.internal.crypto.parseOTPMigrationData
 import at.mcbabo.authenticator.ui.viewmodel.AddOTPViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)

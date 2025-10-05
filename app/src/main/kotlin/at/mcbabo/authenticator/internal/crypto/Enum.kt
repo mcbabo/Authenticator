@@ -1,4 +1,4 @@
-package at.mcbabo.authenticator.data.crypto
+package at.mcbabo.authenticator.internal.crypto
 
 import kotlinx.serialization.Serializable
 

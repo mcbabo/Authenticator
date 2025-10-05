@@ -1,10 +1,10 @@
 package at.mcbabo.authenticator.data.repository
 
-import at.mcbabo.authenticator.data.crypto.Algorithm
-import at.mcbabo.authenticator.data.crypto.AuthType
-import at.mcbabo.authenticator.data.crypto.OtpSecretEncryption
 import at.mcbabo.authenticator.data.db.OtpAccount
 import at.mcbabo.authenticator.data.db.OtpAccountDao
+import at.mcbabo.authenticator.internal.crypto.Algorithm
+import at.mcbabo.authenticator.internal.crypto.AuthType
+import at.mcbabo.authenticator.internal.crypto.OtpSecretEncryption
 import javax.inject.Inject
 
 class OtpAccountRepository @Inject constructor(

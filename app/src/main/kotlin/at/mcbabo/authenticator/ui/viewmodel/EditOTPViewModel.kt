@@ -2,9 +2,9 @@ package at.mcbabo.authenticator.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import at.mcbabo.authenticator.data.crypto.OTPGenerator
 import at.mcbabo.authenticator.data.db.OtpAccount
 import at.mcbabo.authenticator.data.repository.OtpAccountRepository
+import at.mcbabo.authenticator.internal.crypto.OTPGenerator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

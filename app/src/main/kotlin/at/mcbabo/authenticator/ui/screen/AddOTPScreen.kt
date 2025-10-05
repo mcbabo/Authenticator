@@ -41,9 +41,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import at.mcbabo.authenticator.R
-import at.mcbabo.authenticator.data.crypto.AuthType
-import at.mcbabo.authenticator.data.crypto.OtpAuthData
-import at.mcbabo.authenticator.data.crypto.parseOTPAccountData
+import at.mcbabo.authenticator.internal.crypto.AuthType
+import at.mcbabo.authenticator.internal.crypto.OtpAuthData
+import at.mcbabo.authenticator.internal.crypto.parseOTPAccountData
 import at.mcbabo.authenticator.ui.viewmodel.AddOTPEvent
 import at.mcbabo.authenticator.ui.viewmodel.AddOTPViewModel
 

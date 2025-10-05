@@ -21,7 +21,6 @@ sealed class EditOTPUiState {
 sealed class EditOTPEvent {
     data class ShowError(val message: String) : EditOTPEvent()
     data class ShowSuccess(val message: String) : EditOTPEvent()
-    data class CodeCopied(val code: String) : EditOTPEvent()
 }
 
 @HiltViewModel

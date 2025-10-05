@@ -40,7 +40,6 @@ sealed class ViewOTPUiState {
 sealed class ViewOTPEvent {
     data class ShowError(val message: String) : ViewOTPEvent()
     data class ShowSuccess(val message: String) : ViewOTPEvent()
-    data class CodeCopied(val code: String) : ViewOTPEvent()
 }
 
 @HiltViewModel
@@ -75,20 +74,10 @@ class ViewOTPViewModel @Inject constructor(
     }
 
     fun setSortType(type: SortType) {
-        _sortType.value = type
-    }
-
-    fun deleteAccount(accountId: Long) = viewModelScope.launch {
-        try {
-            repository.deleteAccount(accountId)
-            _events.emit(ViewOTPEvent.ShowSuccess("Account deleted"))
-        } catch (e: Exception) {
-            _events.emit(ViewOTPEvent.ShowError("Failed to delete account: ${e.message}"))
+        viewModelScope.launch {
+            userPreferences.setSortType(type)
         }
-    }
-
-    fun copyCode(code: String) = viewModelScope.launch {
-        _events.emit(ViewOTPEvent.CodeCopied(code))
+        _sortType.value = type
     }
 
     fun searchAccounts(query: String) {

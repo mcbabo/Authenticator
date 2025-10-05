@@ -1,5 +1,6 @@
 package at.mcbabo.authenticator.ui.screen
 
+import android.Manifest
 import android.util.Log
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -9,18 +10,20 @@ import androidx.camera.view.PreviewView
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -61,16 +64,8 @@ fun CameraScreen(
     }
 
     val cameraPermissionState = rememberPermissionState(
-        android.Manifest.permission.CAMERA
+        Manifest.permission.CAMERA
     )
-
-    LaunchedEffect(true) {
-        cameraPermissionState.launchPermissionRequest()
-    }
-
-    if (!cameraPermissionState.status.isGranted) {
-        return
-    }
 
     Scaffold { innerPadding ->
         Box(
@@ -79,6 +74,26 @@ fun CameraScreen(
                 .padding(innerPadding)
                 .padding(vertical = 8.dp)
         ) {
+            if (!cameraPermissionState.status.isGranted) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column {
+                        Text(text = "Need camera permission to scan QR codes")
+                        Button(
+                            onClick = { cameraPermissionState.launchPermissionRequest() },
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .padding(top = 8.dp)
+                        ) {
+                            Text(text = "Grant permission")
+                        }
+                    }
+                }
+                return@Box
+            }
             AndroidView(
                 factory = { context ->
                     val previewView = PreviewView(context).apply {

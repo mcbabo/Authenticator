@@ -36,4 +36,6 @@
   <string name="privacy_feature_desc">Require authentication when opening the app</string>
   <string name="appearance">Appearance</string>
   <string name="security">Security</string>
+  <string name="choose_tap_gesture">Choose tap gesture</string>
+  <string name="currently">Currently: %1$s</string>
 </resources>

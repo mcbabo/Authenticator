@@ -79,6 +79,8 @@ fun ViewOTPScreen(
     val searchQuery by viewModel.searchQuery.collectAsState()
     val sortType by viewModel.sortType.collectAsState()
 
+    val gestureType by viewModel.gestureType.collectAsState()
+
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val clipboardManager = LocalClipboard.current
@@ -185,7 +187,10 @@ fun ViewOTPScreen(
                                 OTPAccountItem(
                                     modifier = Modifier,
                                     account = accountWithCode,
-                                    onClick = { onAccountClick(accountWithCode.account.id) },
+                                    gestureType = gestureType,
+                                    onClick = {
+                                        onAccountClick(accountWithCode.account.id)
+                                    },
                                     onLongClick = {
                                         coroutineScope.launch {
                                             if (!accountWithCode.currentCode.isNullOrEmpty()) {
@@ -264,14 +269,18 @@ fun ViewOTPScreen(
                         OTPAccountItem(
                             modifier = Modifier,
                             account = accountWithCode,
-                            onClick = { onAccountClick(accountWithCode.account.id) },
+                            gestureType = gestureType,
+                            onClick = {
+                                onAccountClick(accountWithCode.account.id)
+                            },
                             onLongClick = {
                                 coroutineScope.launch {
                                     if (!accountWithCode.currentCode.isNullOrEmpty()) {
-                                        val clipData = ClipData.newPlainText(
-                                            context.getString(R.string.otp_code),
-                                            accountWithCode.currentCode
-                                        )
+                                        val clipData =
+                                            ClipData.newPlainText(
+                                                context.getString(R.string.otp_code),
+                                                accountWithCode.currentCode
+                                            )
                                         coroutineScope.launch {
                                             clipboardManager.setClipEntry(
                                                 clipData.toClipEntry()

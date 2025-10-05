@@ -15,11 +15,17 @@ enum class SortType {
     ID
 }
 
+enum class GestureType(val displayName: String) {
+    TAP_TO_COPY("Tap to copy"),
+    LONG_PRESS_TO_COPY("Long press to copy"),
+}
+
 object PreferencesKeys {
     val USE_DYNAMIC_COLORS = booleanPreferencesKey("use_dynamic_colors")
     val FIRST_LAUNCH = booleanPreferencesKey("first_launch")
     val SORT_TYPE = stringPreferencesKey("sort_type")
     val LOCK_ENABLED = booleanPreferencesKey("lock_enabled")
+    val GESTURE_TYPE = stringPreferencesKey("gesture_type")
 }
 
 class UserPreferences(private val context: Context) {
@@ -34,6 +40,9 @@ class UserPreferences(private val context: Context) {
 
     val lockEnabled: Flow<Boolean> = context.dataStore.data
         .map { it[PreferencesKeys.LOCK_ENABLED] ?: false }
+
+    val gestureType: Flow<GestureType> = context.dataStore.data
+        .map { enumValueOf<GestureType>(it[PreferencesKeys.GESTURE_TYPE] ?: GestureType.TAP_TO_COPY.name) }
 
     suspend fun setUseDynamicColors(enabled: Boolean) {
         context.dataStore.edit { prefs ->
@@ -56,6 +65,12 @@ class UserPreferences(private val context: Context) {
     suspend fun setLockEnabled(enabled: Boolean) {
         context.dataStore.edit { prefs ->
             prefs[PreferencesKeys.LOCK_ENABLED] = enabled
+        }
+    }
+
+    suspend fun setGestureType(gestureType: GestureType) {
+        context.dataStore.edit { prefs ->
+            prefs[PreferencesKeys.GESTURE_TYPE] = gestureType.name
         }
     }
 }

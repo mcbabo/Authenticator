@@ -37,4 +37,6 @@
   <string name="privacy_feature_desc">Authentifizierung beim Öffnen der App erforderlich</string>
   <string name="appearance">Darstellung</string>
   <string name="security">Sicherheit</string>
+  <string name="choose_tap_gesture">Wähle Tippgeste</string>
+  <string name="currently">Derzeit: %1$s</string>
 </resources>

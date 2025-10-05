@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import at.mcbabo.authenticator.R
+import at.mcbabo.authenticator.data.store.GestureType
 import at.mcbabo.authenticator.internal.BiometricAuthManager
 import at.mcbabo.authenticator.ui.components.PreferenceSubtitle
 import at.mcbabo.authenticator.ui.components.PreferenceSwitch
@@ -37,6 +38,7 @@ fun SettingsScreen(
 
     val useDynamicColors by viewModel.useDynamicColors.collectAsState()
     val lockEnabled by viewModel.lockEnabled.collectAsState()
+    val gestureType by viewModel.gestureType.collectAsState()
 
     val context = LocalContext.current
     val activity = LocalActivity.current as AppCompatActivity
@@ -84,6 +86,16 @@ fun SettingsScreen(
                     description = stringResource(R.string.dynamic_color_desc),
                     isChecked = useDynamicColors,
                 ) { viewModel.setUseDynamicColors(!useDynamicColors) }
+                PreferenceSwitch(
+                    title = stringResource(R.string.choose_tap_gesture),
+                    description = stringResource(R.string.currently, gestureType.displayName),
+                    isChecked = gestureType == GestureType.LONG_PRESS_TO_COPY,
+                ) {
+                    when (gestureType) {
+                        GestureType.TAP_TO_COPY -> viewModel.setGestureType(GestureType.LONG_PRESS_TO_COPY)
+                        GestureType.LONG_PRESS_TO_COPY -> viewModel.setGestureType(GestureType.TAP_TO_COPY)
+                    }
+                }
             }
 
             item {

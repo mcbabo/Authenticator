@@ -2,6 +2,7 @@ package at.mcbabo.authenticator.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import at.mcbabo.authenticator.data.store.GestureType
 import at.mcbabo.authenticator.data.store.SortType
 import at.mcbabo.authenticator.data.store.UserPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,6 +28,9 @@ class PreferenceViewModel @Inject constructor(
     val lockEnabled: StateFlow<Boolean> =
         userPreferences.lockEnabled.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
+    val gestureType: StateFlow<GestureType> =
+        userPreferences.gestureType.stateIn(viewModelScope, SharingStarted.Eagerly, GestureType.TAP_TO_COPY)
+
     fun setUseDynamicColors(enabled: Boolean) {
         viewModelScope.launch {
             userPreferences.setUseDynamicColors(enabled)
@@ -48,6 +52,12 @@ class PreferenceViewModel @Inject constructor(
     fun setLockEnabled(enabled: Boolean) {
         viewModelScope.launch {
             userPreferences.setLockEnabled(enabled)
+        }
+    }
+
+    fun setGestureType(gestureType: GestureType) {
+        viewModelScope.launch {
+            userPreferences.setGestureType(gestureType)
         }
     }
 }

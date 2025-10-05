@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import at.mcbabo.authenticator.R
+import at.mcbabo.authenticator.data.store.GestureType
 import at.mcbabo.authenticator.internal.crypto.AuthType
 import at.mcbabo.authenticator.ui.viewmodel.OtpAccountWithCode
 
@@ -26,17 +27,29 @@ import at.mcbabo.authenticator.ui.viewmodel.OtpAccountWithCode
 fun OTPAccountItem(
     modifier: Modifier,
     account: OtpAccountWithCode,
+    gestureType: GestureType,
     onClick: () -> Unit,
     onLongClick: () -> Unit,
     onHOTPClick: () -> Unit = {}
 ) {
+    val gestureModifier = when (gestureType) {
+        GestureType.LONG_PRESS_TO_COPY -> Modifier
+            .combinedClickable(
+                onClick = onClick,
+                onLongClick = onLongClick
+            )
+
+        GestureType.TAP_TO_COPY -> Modifier
+            .combinedClickable(
+                onClick = onLongClick,
+                onLongClick = onClick
+            )
+    }
+
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .combinedClickable(
-                onClick = { onClick() },
-                onLongClick = { onLongClick() }
-            )
+            .then(gestureModifier)
             .padding(16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically

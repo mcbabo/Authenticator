@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import at.mcbabo.authenticator.data.db.OtpAccount
 import at.mcbabo.authenticator.data.repository.OtpAccountRepository
+import at.mcbabo.authenticator.data.store.GestureType
 import at.mcbabo.authenticator.data.store.SortType
 import at.mcbabo.authenticator.data.store.UserPreferences
 import at.mcbabo.authenticator.internal.crypto.AuthType
@@ -63,12 +64,18 @@ class ViewOTPViewModel @Inject constructor(
     private val _sortType = MutableStateFlow(SortType.ISSUER)
     val sortType: StateFlow<SortType> = _sortType.asStateFlow()
 
+    private val _gestureType = MutableStateFlow(GestureType.TAP_TO_COPY)
+    val gestureType: StateFlow<GestureType> = _gestureType.asStateFlow()
+
     init {
         startUpdater()
         observeSearchQuery()
         viewModelScope.launch {
             userPreferences.sortType.collect {
                 _sortType.value = it
+            }
+            userPreferences.gestureType.collect {
+                _gestureType.value = it
             }
         }
     }
@@ -78,6 +85,13 @@ class ViewOTPViewModel @Inject constructor(
             userPreferences.setSortType(type)
         }
         _sortType.value = type
+    }
+
+    fun setGestureType(type: GestureType) {
+        viewModelScope.launch {
+            userPreferences.setGestureType(type)
+        }
+        _gestureType.value = type
     }
 
     fun searchAccounts(query: String) {

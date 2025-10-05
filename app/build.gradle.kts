@@ -1,12 +1,17 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.io.FileInputStream
 import java.util.Properties
-import kotlin.toString
 
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+    alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlin.serialization)
+
+    alias(libs.plugins.wire)
 }
 
 val keystorePropertiesFile: File = rootProject.file("keystore.properties")
@@ -46,8 +51,13 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        debug {
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
@@ -62,6 +72,14 @@ android {
 kotlin {
     compilerOptions {
         jvmTarget = JvmTarget.JVM_11
+    }
+    sourceSets {
+        getByName("debug") {
+            kotlin.srcDir("build/generated/source/wire/debug")
+        }
+        getByName("release") {
+            kotlin.srcDir("build/generated/source/wire/release")
+        }
     }
 }
 
@@ -82,4 +100,45 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    implementation(libs.androidx.material.icons.extended)
+
+    implementation(libs.bundles.room)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.datastore.preferences)
+
+    implementation(libs.bundles.hilt)
+    ksp(libs.hilt.compiler)
+
+    implementation(libs.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+
+    implementation(libs.androidx.biometric)
+    implementation(libs.accompanist.permissions)
+
+    implementation(libs.bundles.camera)
+    implementation(libs.zxing.core)
+    implementation(libs.barcode.scanning)
+
+    implementation(libs.wire.runtime)
+
+    implementation(libs.kotlin.base32)
+}
+
+wire {
+    kotlin {}
+    sourcePath {
+        srcDir("src/main/proto")
+    }
+}
+
+tasks {
+    configureEach {
+        if (this.name.contains("kspDebugKotlin")) {
+            this.dependsOn("generateDebugProtos")
+        }
+        if (this.name.contains("kspReleaseKotlin")) {
+            this.dependsOn("generateReleaseProtos")
+        }
+    }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Authenticator</string>
+  <string name="no_issuer">Kein Anbieter</string>
+  <string name="save">Speichern</string>
+  <string name="back">Löschen</string>
+  <string name="delete_account">Account löschen</string>
+  <string name="delete_account_desc">Möchtest du dieses Konto wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden. Wenn du kein Backup deiner Codes hast, verlierst du möglicherweise den Zugriff auf dein Konto.</string>
+  <string name="account_name">Accountname</string>
+  <string name="issuer">Anbieter</string>
+  <string name="edit_otp">OTP bearbeiten</string>
+  <string name="sort">Sortieren</string>
+  <string name="otp_code">Einmalcode</string>
+  <string name="add_otp_account">Einmalcode hinzufügen</string>
+  <string name="add_key">Schlüssel hinzufügen</string>
+  <string name="select_type">Typ auswählen</string>
+  <string name="use_biometric_authentication">Fingerabruck verwenden</string>
+  <string name="biometric_auth_title">Bestätige deine Identität</string>
+  <string name="biometric_auth_desc">Verwende deinen Fingerabdruck oder deine Entsperrmethode, um fortzufahren</string>
+  <string name="secret">Schlüssel</string>
+  <string name="import_accounts">Accounts importieren</string>
+  <string name="import_accounts_desc">Bitte überprüfe nach dem Import die importierten Konten mit deiner alten App auf ihre Richtigkeit.</string>
+  <string name="import_accounts_info">Die folgenden Konten wurden im bereitgestellten QR-Code gefunden. Du kannst sie in die App importieren.</string>
+  <string name="scan_qr_code">QR-Code scannen</string>
+  <string name="enter_key_manually">Schlüssel eingeben</string>
+  <string name="first_launch_disclaimer_text_1">Die Entwickler und Vertreiber dieser Anwendung übernehmen keine Haftung für Verluste, Schäden oder Zugriffsprobleme, die durch die Nutzung der App entstehen, einschließlich, aber nicht beschränkt auf fehlerhafte OTP-Generierung, Kontosperrungen oder Datenbeschädigungen. Diese App wird „wie besehen“ ohne jegliche Garantien oder Gewährleistungen bereitgestellt. Durch die Nutzung erkennen Sie an, dass die Verantwortung für korrekte Einrichtung, genaue Zeiteinstellungen und sichere Aufbewahrung der Schlüssel ausschließlich bei Ihnen liegt.</string>
+  <string name="first_launch_disclaimer_text_0">Diese Anwendung generiert Einmalpasswörter (OTPs) lokal auf Ihrem Gerät, um eine sichere Authentifizierung zu unterstützen. Sie arbeitet vollständig offline – keine Daten, Schlüssel oder Kontoinformationen verlassen jemals das Gerät. Obwohl die App auf Genauigkeit und Zuverlässigkeit ausgelegt ist, können fehlerhafte Zeiteinstellungen, Hardwareprobleme oder Konfigurationsfehler zu ungültigen oder abgelaufenen Codes führen. Benutzer sollten Authentifizierungsdaten, wenn möglich, über offizielle oder alternative Methoden überprüfen.</string>
+  <string name="first_launch_disclaimer_title">Haftungsausschluss</string>
+  <string name="first_launch_disclaimer_text_2">Keine Daten verlassen jemals diese App.</string>
+  <string name="confirm">Bestätigen</string>
+  <string name="settings">Einstellungen</string>
+  <string name="edit">Bearbeiten</string>
+  <string name="search">Suchen</string>
+  <string name="dynamic_color">Dynamische Farbe</string>
+  <string name="dynamic_color_desc">Farben von Hintergrundbildern auf das Farbschema anwenden</string>
+  <string name="privacy_feature">Privatsphärefunktion</string>
+  <string name="privacy_feature_desc">Authentifizierung beim Öffnen der App erforderlich</string>
+  <string name="appearance">Darstellung</string>
+  <string name="security">Sicherheit</string>
+</resources>

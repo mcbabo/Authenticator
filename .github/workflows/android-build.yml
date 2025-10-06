@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        abi: [ armeabi-v7a, arm64-v8a, x86_64 ]
 
     steps:
       - name: Checkout code
@@ -19,9 +22,19 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+          cache: 'gradle'
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: gradle-${{ runner.os }}-
 
       - name: Decode Keystore
         run: |
@@ -30,23 +43,33 @@ jobs:
       - name: Grant execute permission to Gradle
         run: chmod +x ./gradlew
 
-      - name: Build signed release APK
+      - name: Build ${{ matrix.abi }} APK
         env:
           KEYSTORE_PATH: my-release-key.jks
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        run: ./gradlew clean assembleRelease
+          ABI_FILTER: ${{ matrix.abi }}
+        run: ./gradlew assembleRelease -PABI_FILTER=${{ matrix.abi }}
 
-      - name: Upload APK as Artifact
+      - name: Upload ${{ matrix.abi }} APK as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: release-apk
-          path: app/build/outputs/apk/release/*.apk
+          name: release-${{ matrix.abi }}-apk
+          path: app/build/outputs/apk/release/*${{ matrix.abi }}*.apk
 
-      - name: Upload APK to GitHub Release
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download all APK artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./apks
+
+      - name: Upload APKs to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: app/build/outputs/apk/release/*.apk
+          files: apks/**.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GH_UPLOAD_TOKEN }}

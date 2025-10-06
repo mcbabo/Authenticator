@@ -28,6 +28,14 @@ android {
         versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            if (project.hasProperty("ABI_FILTER")) {
+                abiFilters.add(project.property("ABI_FILTER") as String)
+            } else {
+                abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a", "x86_64"))
+            }
+        }
     }
 
     signingConfigs {

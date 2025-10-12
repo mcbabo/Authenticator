@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.input.clearText
 import androidx.compose.foundation.text.input.rememberTextFieldState
-import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Sort
 import androidx.compose.material.icons.filled.Add
@@ -76,7 +75,6 @@ fun ViewOTPScreen(
     viewModel: ViewOTPViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val searchQuery by viewModel.searchQuery.collectAsState()
     val sortType by viewModel.sortType.collectAsState()
 
     val gestureType by viewModel.gestureType.collectAsState()
@@ -101,18 +99,10 @@ fun ViewOTPScreen(
     var fabMenuExpanded by rememberSaveable { mutableStateOf(false) }
     BackHandler(fabMenuExpanded) { fabMenuExpanded = false }
 
-    LaunchedEffect(searchQuery) {
-        if (textFieldState.text.toString() != searchQuery) {
-            textFieldState.setTextAndPlaceCursorAtEnd(searchQuery)
-        }
-    }
-
     LaunchedEffect(textFieldState.text) {
         snapshotFlow { textFieldState.text.toString() }
             .collect { text ->
-                if (text != searchQuery) {
-                    viewModel.searchAccounts(text)
-                }
+                viewModel.searchAccounts(text)
             }
     }
 

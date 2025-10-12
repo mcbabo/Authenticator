@@ -52,7 +52,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.toClipEntry
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -82,7 +81,6 @@ fun ViewOTPScreen(
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val clipboardManager = LocalClipboard.current
-    val focusManager = LocalFocusManager.current
 
     val listState = rememberLazyListState()
     val searchListState = rememberLazyListState()
@@ -109,8 +107,6 @@ fun ViewOTPScreen(
     LaunchedEffect(searchBarState.currentValue) {
         if (searchBarState.currentValue == SearchBarValue.Collapsed) {
             textFieldState.clearText()
-            focusManager.clearFocus()
-            viewModel.searchAccounts("")
         }
     }
 
@@ -120,7 +116,6 @@ fun ViewOTPScreen(
             textFieldState = textFieldState,
             onBack = {
                 textFieldState.clearText()
-                focusManager.clearFocus()
                 coroutineScope.launch { searchBarState.animateToCollapsed() }
             }
         )

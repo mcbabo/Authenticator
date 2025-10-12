@@ -103,7 +103,8 @@ fun AddOTPScreen(
                     onValueChange = { issuer = it },
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(stringResource(R.string.issuer)) },
-                    isError = isIssuerEmpty
+                    isError = isIssuerEmpty,
+                    maxLines = 1
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -112,7 +113,8 @@ fun AddOTPScreen(
                     value = accountName,
                     onValueChange = { accountName = it },
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text(stringResource(R.string.account_name)) }
+                    label = { Text(stringResource(R.string.account_name)) },
+                    maxLines = 1
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -131,7 +133,8 @@ fun AddOTPScreen(
                     },
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(stringResource(R.string.secret)) },
-                    isError = isSecretEmpty
+                    isError = isSecretEmpty,
+                    maxLines = 1
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -151,7 +154,8 @@ fun AddOTPScreen(
                             imageVector = icon,
                             contentDescription = "expand",
                             modifier = Modifier.clickable { mExpanded = !mExpanded })
-                    }
+                    },
+                    maxLines = 1
                 )
 
                 DropdownMenu(

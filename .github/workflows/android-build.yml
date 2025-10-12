@@ -70,6 +70,6 @@ jobs:
       - name: Upload APKs to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: apks/**.apk
+          files: apks/**/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GH_UPLOAD_TOKEN }}

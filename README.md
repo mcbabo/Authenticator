@@ -57,9 +57,9 @@ at.mcbabo.authenticator/
 
 ## Credits
 
-Huge shoutout to the [Seal](https://github.com/seal) team!
+Huge shoutout to the [Seal](https://github.com/JunkFood02/Seal) team!
 
-The app is mostly inspired by [Seal](https://github.com/seal) and other Material 3 apps
+The app is mostly inspired by [Seal](https://github.com/JunkFood02/Seal) and other Material 3 apps
 
 ## License
 
